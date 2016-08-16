@@ -99,8 +99,7 @@ void Solver::solve() {
 
 }
 
-int Solver::findM(std::vector<double> nodesIndInwH, std::vector<double> nodesIndInwL, std::vector<double> nodesIndOutwH,
-                  std::vector<double> nodesIndOutwL) {
+int Solver::findM(MN::VecInt nodesIndInwH, MN::VecInt nodesIndInwL, MN::VecInt nodesIndOutwH, MN::VecInt nodesIndOutwL) {
     return 0;
 }
 

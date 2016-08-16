@@ -29,7 +29,7 @@ public:
     MN::VecInt findNodesIndices(MN::VecDoub detR_List);
     int countNodes(MN::VecDoub detR_List);
     MN::VecDoub detRList(arma::cube RList);
-    int findM(MN::VecDoub nodesIndInwH, MN::VecDoub nodesIndInwL, MN::VecDoub nodesIndOutwH, MN::VecDoub nodesIndOutwL );
+    int findM(MN::VecInt nodesIndInwH, MN::VecInt nodesIndInwL, MN::VecInt nodesIndOutwH, MN::VecInt nodesIndOutwL);
     void bisection(double EL, double EH);
     void solve();
     void stdCalculationsForE(arma::cube &RInw, arma::cube &ROutw, int &nNodes, double E, arma::cube VList,
