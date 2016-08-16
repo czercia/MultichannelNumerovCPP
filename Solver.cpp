@@ -83,7 +83,7 @@ void Solver::solve() {
     double E;
     int nE = 2;
     arma::cube RInw, ROutw;
-    int nodesInwNumber, nodesOutwNumber, nodesNumber;
+    int nodesNumber;
     MN::VecDoub EList, numberOfNodesList;
     MN::VecDoub detRInw, detROutw;
     for (int j = 1; j < nE ; ++j) {
@@ -91,7 +91,6 @@ void Solver::solve() {
         stdCalculationsForE(RInw, ROutw, nodesNumber, E, VList, detRInw, detROutw);
         EList.push_back(E);
         numberOfNodesList.push_back(nodesNumber);
-
     }
 
 
