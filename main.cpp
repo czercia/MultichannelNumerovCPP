@@ -14,7 +14,7 @@ int main() {
 
     Tester test;
     test.testParamsSetV(V);
-    test.testSolverU();
+//    test.testSolverU();
     std::cout << "Hihi" ;
 
 

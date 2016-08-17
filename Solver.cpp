@@ -12,7 +12,7 @@ arma::mat Solver::calculateU(int j, double E) {
     arma::mat Id, T, U;
     Id = arma::eye<arma::mat>(params.getNChannels(), params.getNChannels());
 
-    T = -(E * Id - params.getVList.slice(j)) / 12;
+    T = -(E * Id - params.getVList().slice(j)) / 12;
     U = (Id-T).i() * (2 * Id + 10 * T);
 
     return U;

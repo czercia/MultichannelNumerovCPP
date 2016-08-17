@@ -7,7 +7,7 @@
 //#define ARMA_USE_LAPACK
 //#define ARMA_DONT_USE_WRAPPER
 #include <armadillo>
-#include<iostream>
+#include <iostream>
 #include "Parameters.h"
 #include "MN.h"
 

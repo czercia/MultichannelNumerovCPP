@@ -5,11 +5,11 @@
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Tester.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Solver.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/MN.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Solver.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Parameters.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/State.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/main.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Solver.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MN.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Tester.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Parameters.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/State.cpp" isTestSource="false" />
