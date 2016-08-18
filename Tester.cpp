@@ -4,21 +4,27 @@
 
 #include "Tester.h"
 
-Tester::Tester() {
+Tester::Tester(MN::Potential func) {
     params = Parameters();
-    testSolver = Solver(params);
-}
-
-void Tester::testParamsSetV(MN::Potential func) {
     params.userV = func;
     params.calculateVList();
-    VList = params.getVList();
-}
+    testSolver = Solver(params);
 
-void Tester::testSolverU() {
+
+    VList = params.getVList();
+    VList.print();}
+
+
+void Tester::testSolverU(){
+
     double E = 1;
+
     for(int i = 0; i < params.N(); i++) {
-        testSolver.calculateU(i, E);
+        try{
+        testSolver.calculateU(i, E);}
+        catch (...){
+            std::cout << i << std::endl;
+        }
     }
 
 }

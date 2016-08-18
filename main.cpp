@@ -12,9 +12,8 @@ double V(int i, int j, double x) {
 
 int main() {
 
-    Tester test;
-    test.testParamsSetV(V);
-//    test.testSolverU();
+    Tester test(V);
+    test.testSolverU();
     std::cout << "Hihi" ;
 
 
