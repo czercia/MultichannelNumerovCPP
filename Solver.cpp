@@ -90,36 +90,36 @@ int Solver::countNodes(MN::VecDoub detR_List) {
 void Solver::solve() {
     params.calculateVList();
     arma::cube VList = params.getVList();
-    double E;
-    int nE = 2;
+    double energy;
+    int nE = 10;
     arma::cube RInw, ROutw, RInwBef, ROutwBef;
     int nodesNumber, nodesNumberBef;
     MN::VecDoub EList, numberOfNodesList;
     MN::VecDoub detRInw, detROutw;
 
-    E = params.E(0);
-    stdCalculationsForE(RInwBef, ROutwBef, nodesNumberBef, E, VList, detRInw, detROutw);
-    EList.push_back(E);
+    energy = params.E(0);
+    stdCalculationsForE(RInwBef, ROutwBef, nodesNumberBef, energy, detRInw, detROutw);
+    EList.push_back(energy);
     numberOfNodesList.push_back(nodesNumber);
 
 
-//    for (int j = 1; j < nE ; ++j) {
-//        E = params.E(j);
-//        stdCalculationsForE(RInw, ROutw, nodesNumber, E, VList, detRInw, detROutw);
-//        EList.push_back(E);
-//        numberOfNodesList.push_back(nodesNumber);
-//
-//
-////        if (nodesNumber > nodesNumberBef){
-////            bisection()
-////        }
-////        else{
-//        RInwBef = RInw;
-//        ROutwBef = ROutw;
-//        nodesNumberBef = nodesNumber;
-////            continue;
-//// }
-//    }
+    for (int j = 1; j < nE ; ++j) {
+        energy = params.E(j);
+        stdCalculationsForE(RInw, ROutw, nodesNumber, energy, detRInw, detROutw);
+        EList.push_back(energy);
+        numberOfNodesList.push_back(nodesNumber);
+
+
+        if (nodesNumber > nodesNumberBef){
+            bisection(params.E(j - 1), params.E(j));
+        }
+        else{
+        RInwBef = RInw;
+        ROutwBef = ROutw;
+        nodesNumberBef = nodesNumber;
+            continue;
+ }
+    }
 
 
 
@@ -131,8 +131,45 @@ int Solver::findM(MN::VecInt nodesIndInwH, MN::VecInt nodesIndInwL, MN::VecInt n
     return 0;
 }
 
-void Solver::bisection(double EL, double EH) {
+double Solver::bisection(double EL, double EH) {
 
+    double s;
+    arma::cube RInwL, ROutwL, RInwH, ROutwH, RInwS, ROutwS;
+    int nodesNumberL, nodesNumberH, nodesNumberS;
+    MN::VecDoub EList, numberOfNodesList;
+    MN::VecDoub detRInwL, detROutwL, detRInwH, detROutwH, detRInwS, detROutwS;
+    stdCalculationsForE(RInwL, ROutwL, nodesNumberL, EL, detRInwL, detROutwL);
+    stdCalculationsForE(RInwH, ROutwH, nodesNumberH, EH, detRInwH, detROutwH);
+
+    MN::VecInt nodesIndicesLInw = findNodesIndices(detRInwL);
+    MN::VecInt nodesIndicesHInw = findNodesIndices(detRInwH);
+    MN::VecInt nodesIndicesLOutw = findNodesIndices(detROutwL);
+    MN::VecInt nodesIndicesHOutw = findNodesIndices(detROutwH);
+
+    int M = findM(nodesIndicesHInw, nodesIndicesLInw, nodesIndicesHOutw, nodesIndicesLOutw);
+
+    if (nodesNumberL < nodesNumberH){
+        s = EL;
+        while((EH - EL )> params.getEpsilon()){
+            s = (EH + EL)/2;
+            stdCalculationsForE(RInwS, ROutwS, nodesNumberS, s, detRInwS, detROutwS);
+            if ( nodesNumberL < nodesNumberS )
+            {
+                EH = s;
+                nodesNumberH = nodesNumberS;
+            }
+            else if(nodesNumberH > nodesNumberS){
+                EL = s;
+                nodesNumberL = nodesNumberS;
+            }
+            else break;
+        }
+    }
+    else{
+        s=0;;
+    }
+
+    return s;
 
 }
 //double bisekcja(double E_1, double E_2, Parameters params) {
@@ -156,13 +193,14 @@ void Solver::bisection(double EL, double EH) {
 //    return s;
 //}
 
-void Solver::stdCalculationsForE(arma::cube &RInw, arma::cube &ROutw, int &nNodes, double E, arma::cube VList,
-                                 MN::VecDoub &detsInw, MN::VecDoub &detsOutw) {
+void Solver::stdCalculationsForE(arma::cube &RInw, arma::cube &ROutw, int &nNodes, double E, MN::VecDoub &detsInw,
+                                 MN::VecDoub &detsOutw) {
     arma::cube UList(params.getNChannels(), params.getNChannels(), params.N());
     for (int j = 0; j < params.N(); j++){
         UList.slice(j) = calculateU(j, E);
     }
     RInw = RInward(UList);
+
     ROutw = ROutward(UList);
     detsInw = detRList(RInw);
     detsOutw = detRList(ROutw);
@@ -174,6 +212,8 @@ void Solver::stdCalculationsForE(arma::cube &RInw, arma::cube &ROutw, int &nNode
         std::cout << "number of nodes calculated inward and outward is different";
     else nNodes = nodesInw;
 }
+
+
 
 
 

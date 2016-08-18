@@ -30,10 +30,10 @@ public:
     int countNodes(MN::VecDoub detR_List);
     MN::VecDoub detRList(arma::cube RList);
     int findM(MN::VecInt nodesIndInwH, MN::VecInt nodesIndInwL, MN::VecInt nodesIndOutwH, MN::VecInt nodesIndOutwL);
-    void bisection(double EL, double EH);
+    double bisection(double EL, double EH);
     void solve();
-    void stdCalculationsForE(arma::cube &RInw, arma::cube &ROutw, int &nNodes, double E, arma::cube VList,
-                             MN::VecDoub &detsInw, MN::VecDoub &detsOutw);
+    void stdCalculationsForE(arma::cube &RInw, arma::cube &ROutw, int &nNodes, double E, MN::VecDoub &detsInw,
+                                 MN::VecDoub &detsOutw);
 
 };
 

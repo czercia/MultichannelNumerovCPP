@@ -12,7 +12,7 @@ Tester::Tester(MN::Potential func) {
 
 
     VList = params.getVList();
-//    VList.print();
+
 }
 
 
@@ -25,7 +25,7 @@ void Tester::testSolverU() {
             testSolver.calculateU(i, E);
         }
         catch (...) {
-            std::cout << i << std::endl;
+            std::cout << "Error calculating U for E = " << E <<", i = " << i << std::endl;
         }
     }
 

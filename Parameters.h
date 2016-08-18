@@ -69,6 +69,10 @@ public:
     }
 
     const arma::cube &getVList() const;
+
+    double getEpsilon() const {
+        return epsilon;
+    }
 };
 
 
