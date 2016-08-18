@@ -19,6 +19,7 @@ public:
     Tester(MN::Potential func);
     void testParamsSetV(MN::Potential func);
     void testSolverU();
+    void testSolve();
 
 };
 

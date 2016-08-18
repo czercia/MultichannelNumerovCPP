@@ -12,21 +12,30 @@ Tester::Tester(MN::Potential func) {
 
 
     VList = params.getVList();
-    VList.print();}
+//    VList.print();
+}
 
 
-void Tester::testSolverU(){
+void Tester::testSolverU() {
 
     double E = 1;
 
-    for(int i = 0; i < params.N(); i++) {
-        try{
-        testSolver.calculateU(i, E);}
-        catch (...){
+    for (int i = 0; i < params.N(); i++) {
+        try {
+            testSolver.calculateU(i, E);
+        }
+        catch (...) {
             std::cout << i << std::endl;
         }
     }
 
 }
+
+void Tester::testSolve() {
+    testSolver.solve();
+}
+
+
+
 
 

@@ -13,9 +13,9 @@ double Parameters::E(int i) {
 }
 
 Parameters::Parameters() {
-    xMin = 0;
-    xMax = 10;
-    dx = 1;
+    xMin = 0.1;
+    xMax = 1;
+    dx = 0.1;
     EMin = -10;
     dE = 1;
     EMax = 10;
