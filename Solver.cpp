@@ -168,6 +168,7 @@ double Solver::bisection(double EL, double EH) {
     else{
         s=0;;
     }
+    std::cout << s << std::endl;
 
     return s;
 
