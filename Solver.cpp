@@ -82,15 +82,23 @@ void Solver::solve() {
     arma::cube VList = params.getVList();
     double E;
     int nE = 2;
-    arma::cube RInw, ROutw;
-    int nodesNumber;
+    arma::cube RInw, ROutw, RInwBef, ROutwBef;
+    int nodesNumber, nodesNumberBef;
     MN::VecDoub EList, numberOfNodesList;
     MN::VecDoub detRInw, detROutw;
+
+    E = params.E(0);
+    stdCalculationsForE(RInwBef, ROutwBef, nodesNumberBef, E, VList, detRInw, detROutw);
+    EList.push_back(E);
+    numberOfNodesList.push_back(nodesNumber);
+
+
     for (int j = 1; j < nE ; ++j) {
         E = params.E(j);
         stdCalculationsForE(RInw, ROutw, nodesNumber, E, VList, detRInw, detROutw);
         EList.push_back(E);
         numberOfNodesList.push_back(nodesNumber);
+
     }
 
 
